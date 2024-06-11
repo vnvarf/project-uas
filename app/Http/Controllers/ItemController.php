@@ -99,7 +99,9 @@ class ItemController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $titlePage = "Detail Resep";
+    $item = Item::findOrFail($id);
+    return view('apps.item.show', compact('item', 'titlePage'));
     }
 
     /**

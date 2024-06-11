@@ -54,41 +54,50 @@
                                         <div class="modal fade" id="detailModal{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Data Barang</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div class="modal-header" style="background-color: #ffd700; background-image: url('chef-hat.jpg'); background-repeat: no-repeat; background-size: cover;">
+                                                        <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Detail Data Resep</h1>
+                                                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body" style="background-color: #ffefd5;">
                                                         <div class="container">
                                                             <div class="row">
-                                                                <div class="col-6">
-                                                                    <label for="code-item" class="form-label">Kode Resep</label>
-                                                                    <input type="text" class="form-control" id="code-item" value="{{ $item->code }}" disabled>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3" style="background-color: #ffffffcc;">
+                                                                        <label for="code-item" class="form-label">Kode Resep</label>
+                                                                        <input type="text" class="form-control" id="code-item" value="{{ $item->code }}" disabled>
+                                                                    </div>
+                                                                    <div class="mb-3" style="background-color: #ffffffcc;">
+                                                                        <label for="name-item" class="form-label">Nama Resep</label>
+                                                                        <input type="text" class="form-control" id="name-item" value="{{ $item->name }}" disabled>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-6">
-                                                                    <label for="name-item" class="form-label">Nama Resep</label>
-                                                                    <input type="text" class="form-control" id="name-item" value="{{ $item->name }}" disabled>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3" style="background-color: #ffffffcc;">
+                                                                        <label for="desc-item" class="form-label">Deskripsi Resep</label>
+                                                                        <textarea class="form-control" id="desc-item" style="height: 150px; background-color: #ffffffcc;" disabled>{{ $item->desc }}</textarea>
+                                                                    </div>
+                                                                    <div class="mb-3" style="background-color: #ffffffcc;">
+                                                                        <label for="price-item" class="form-label">Estimasi Pembuatan</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control" id="price-item" value="{{ $item->price }} Menit" disabled>
+                                                                            <span class="input-group-text">Menit</span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row mt-3">
-                                                                <div class="col-6">
-                                                                    <label for="desc-item" class="form-label">Deskripsi Resep</label>
-                                                                    <textarea class="form-control" id="desc-item" style="height: 150px" disabled>{{ $item->desc }}</textarea>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <label for="price-item" class="form-label">Estimasi Pembuatan</label>
-                                                                    <input type="text" class="form-control" id="price-item" value="{{ $item->price }} Menit" disabled>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
+                                                    <div class="modal-footer" style="background-color: #ffd700;">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
 
                                         <!-- Modal Destory -->
                                         <div class="modal fade" id="destroyModal{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
