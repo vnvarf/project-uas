@@ -62,7 +62,7 @@
                                     @enderror
                                 </div>
                                 <div class="row mt-3">
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <label for="image-item" class="form-label">Gambar Resep</label>
                                     <input type="file" class="form-control @error('image_item') is-invalid @enderror" id="image-item" name="image_item" required>
                                     @error('image_item')
@@ -70,7 +70,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                </div>
+                                </div> --}}
                             </div>
                             </div>
                             <div class="row mt-3">

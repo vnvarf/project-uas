@@ -7,6 +7,9 @@ use App\Models\Item;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use PDF;
+use App\Models\Employee;
+
 
 class ItemController extends Controller
 {
@@ -18,6 +21,7 @@ class ItemController extends Controller
     {
         $titlePage = "Data Resep";
         $items = Item::all();
+       // dd($items);
         return view('apps.item.index', compact('titlePage', 'items'));
     }
 
@@ -47,12 +51,12 @@ class ItemController extends Controller
             'name_item' => 'required',
             'desc_item' => 'required',
             'price_item' => 'required|numeric',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'stock_item' => 'required|numeric',
-            'unit_item' => 'required'
+            'image_item' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'stock_item' => 'required|numeric',
+            //'unit_item' => 'required'
         ], $messages);
 
-        // Mengunggah gambar
+        //Mengunggah gambar
         // if ($request->hasFile('image_item')) {
         //     $image = $request->file('image_item');
         //     $imagePath = $image->store('images', 'public');
@@ -60,39 +64,40 @@ class ItemController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput();
         }
+        $imagePath = time() . '.' . $request->image_item->extension();
+        $request->image_item->storeAs('public/images', $imagePath);
 
+        // if ($request->hasFile('image_item')) {
+        //     $image = $request->file('image_item');
+        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $path = $image->storeAs('public/images', $imageName);
+        //     $item->image_item = $imageName;
+        // }
         $item = new Item;
         $item->code = $request->code_item;
-        // $item->unit_id = $request->unit_item;
+        $item->unit_id = $request->unit_item;
         $item->name = $request->name_item;
         $item->price = $request->price_item;
         $item->desc = $request->desc_item;
-        // $item->image_path = $imagePath;
-        $item->unit_id = $request->unit_id;
-        $item->stock = $request->stock_item;
-
-        if ($request->hasFile('image_item')) {
-            $image = $request->file('image_item');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/images', $imageName);
-            $item->image_path = $imageName;
-        }
+        $item->image_item = $imagePath;
+        //$item->unit_id = $request->unit_id;
+       // $item->stock = $request->stock_item;
 
         $item->save();
 
         return redirect()->route('item.index')->with('notif', 'Berhasil Menambah Resep');
     }
 
-    // public function uploadImage(Request $request)
-    // {
-    //     $request->validate([
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
-    //     ]);
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+        ]);
 
-    //     $imagePath = $request->file('image')->store('images'); // Simpan gambar
+        $imagePath = $request->file('image')->store('images'); // Simpan gambar
 
-    //     return response()->json(['image_path' => $imagePath]);
-    // }
+        return response()->json(['image_item' => $imagePath]);
+    }
 
     /**
      * Display the specified resource.
@@ -125,24 +130,28 @@ class ItemController extends Controller
         ];
 
         $validate = Validator::make($request->all(), [
-// 'code_item' => 'required|unique:items,code',
+            'code_item' => 'required|unique:items,code',
             'name_item' => 'required',
             'desc_item' => 'required',
             'price_item' => 'required|numeric',
+            // 'image_item' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], $messages);
 
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput();
         }
+        // $imagePath = time() . '.' . $request->image_item->extension();
+        // $request->image_item->storeAs('public/images', $imagePath);
 
         $item = Item::find($id);
 
-        // $item->code = $request->code_item;
-        // $item->unit_id = $request->unit_item;
+        $item->code = $request->code_item;
+        $item->unit_id = $request->unit_item;
         $item->name = $request->name_item;
         $item->price = $request->price_item;
         $item->desc = $request->desc_item;
-        // $item->stock = $request->stock_item;
+        // $item->image_item = $imagePath;
+        //$item->stock = $request->stock_item;
 
         $item->save();
 
@@ -157,4 +166,14 @@ class ItemController extends Controller
         Item::find($id)->delete();
         return redirect()->route('item.index')->with('notif', 'Berhasil Menghapus Data Resep');
     }
+
+    public function exportPdf()
+{
+    $items = Item::all();
+
+    $pdf = PDF::loadView('apps.item.export_pdf', compact('items'));
+
+    return $pdf->download('items.pdf');
+}
+
 }

@@ -16,17 +16,18 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="padding: 15px">
             <div class="col-md-4">
-                <img src="{{ Vite::asset('resources/images/home/1.jpeg') }}" class="img-fluid" alt="Gambar 1">
+                <img src="{{ Vite::asset('resources/images/home/1.jpeg') }}" class="img-fluid" alt="Gambar 1" style="border-radius: 15px">
             </div>
             <div class="col-md-4">
-                <img src="{{ Vite::asset('resources/images/home/2.jpeg') }}" class="img-fluid" alt="Gambar 2">
+                <img src="{{ Vite::asset('resources/images/home/2.jpeg') }}" class="img-fluid" alt="Gambar 2" style="border-radius: 15px">
             </div>
             <div class="col-md-4">
-                <img src="{{ Vite::asset('resources/images/home/4.jpeg') }}" class="img-fluid" alt="Gambar 3">
+                <img src="{{ Vite::asset('resources/images/home/4.jpeg') }}" class="img-fluid" alt="Gambar 3" style="border-radius: 15px">
             </div>
-            <a href="{{ route('item.index') }}" type="button" class="btn btn-light btn-view-data">View Data <i class="bi bi-arrow-right"></i></a>
+            <br><br>
+            <a href="{{ route('item.index') }}" type="button" class="btn btn-warning" style="margin-top: 20px">Let's Cook<i class="bi bi-arrow-right"></i></a>
         </div>
     </div>
 </section>

@@ -9,8 +9,10 @@
                 <div class="col-lg-3 col-xl-2">
                     <div class="d-grid gap-4">
                         <a href="{{ route('item.create') }}" class="btn btn-outline-success">Tambah Resep</a>
-                        <a href="{{ route('employees.exportExcel') }}" class="btn btn-outline-success">
-                            <i class="bi bi-download me-1"></i> to Excel</a>
+                        <a href="{{ route('item.exportPdf') }}" class="btn btn-outline-danger">
+                            <i class="bi bi-download me-1"></i> to PDF
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -42,7 +44,8 @@
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->price }} Menit</td>
-                                    <td><img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name_item }}" style="width: 100px;"></td>
+                                    <td><img src="{{ asset('storage/images/' . $item->image_item) }}" style="height: 90px;width:100px;"></td>
+                                    {{-- <td><img src="{{ asset('storage/' . $item->image_item) }}" alt="{{ $item->name_item }}" style="width: 100px;"></td> --}}
                                     {{-- <td>{{ $item->stock }}</td> --}}
                                     {{-- <td>{{ $item->unit->name }}</td> --}}
                                     <td>
@@ -79,7 +82,14 @@
                                                                     <label for="price-item" class="form-label">Estimasi Pembuatan</label>
                                                                     <input type="text" class="form-control" id="price-item" value="{{ $item->price }} Menit" disabled>
                                                                 </div>
+                                                                <br>
+
+
                                                             </div>
+
+                                                        </div>
+                                                        <div style="float: right">
+                                                            <img src="{{ asset('storage/images/' . $item->image_item) }}" style="height: 300px;width:400px;">
 
                                                         </div>
                                                     </div>

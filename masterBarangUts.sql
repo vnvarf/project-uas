@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 11, 2024 at 11:18 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Host: 127.0.0.1
+-- Generation Time: Jun 11, 2024 at 05:28 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `masterBarangUts`
+-- Database: `masterbaranguts`
 --
 
 -- --------------------------------------------------------
@@ -45,27 +45,22 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `items` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `unit_id` bigint(20) UNSIGNED NOT NULL,
+  `unit_id` bigint(20) UNSIGNED DEFAULT NULL,
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` bigint(20) NOT NULL,
-  `desc` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL,
+  `desc` longtext NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `unit_id`, `code`, `name`, `price`, `desc`, `stock`, `created_at`, `updated_at`, `image_path`) VALUES
-(1, 1, '001', 'Iguana', 500000, 'Aliquam fuga ullam aut est illo quia aut ut. Cupiditate soluta unde et quidem molestias eveniet. Assumenda a ipsa occaecati cupiditate quia. Quam odit fugit quaerat omnis quod.', 50, '2024-06-10 08:55:30', '2024-06-10 08:55:30', NULL),
-(2, 1, '002', 'ular', 160999, 'Voluptatibus repudiandae doloribus illum laudantium suscipit. Culpa velit qui quibusdam culpa. Voluptatibus cupiditate facilis mollitia esse explicabo nostrum.', 50, '2024-06-10 08:55:30', '2024-06-10 08:55:30', NULL),
-(3, 1, '003', 'Gecko', 550000, 'Voluptatem quaerat quasi dolores facilis similique fuga fugiat. Quidem doloremque et ratione esse esse non in. Ut sed voluptatem ut rem corrupti omnis.', 60, '2024-06-10 08:55:30', '2024-06-10 08:55:30', NULL),
-(4, 1, '004', 'Soalayar', 280000, 'Et occaecati ut quibusdam non accusantium voluptas quos omnis. Et totam quia nobis nihil soluta repellendus. Voluptatem nobis nobis illum. Pariatur velit est hic et corrupti minus nobis sunt.', 70, '2024-06-10 08:55:30', '2024-06-10 08:55:30', NULL),
-(5, 1, '005', 'Biawak', 1550000, 'Libero suscipit maiores et tempora vitae. Ipsa qui velit eum magnam adipisci repudiandae. Repudiandae nam eveniet eius nihil laboriosam praesentium.', 10, '2024-06-10 08:55:30', '2024-06-10 08:55:30', NULL);
+INSERT INTO `items` (`id`, `unit_id`, `code`, `name`, `price`, `desc`, `created_at`, `updated_at`) VALUES
+(8, NULL, '001', 'Sayur Sop', 20, 'Sayur Sop adalah salah satu hidangan sayuran khas Indonesia yang sederhana namun sangat lezat dan bergizi. Hidangan ini biasanya terdiri dari berbagai macam sayuran yang dimasak dalam kaldu ayam atau daging yang ringan dan menyegarkan. Sayur Sop sering kali disajikan sebagai menu sehari-hari di rumah-rumah Indonesia karena mudah dibuat dan cocok untuk semua usia.\r\n\r\nBahan-bahan\r\n1.  200 gram daging ayam (dada atau paha), potong dadu\r\n2. 1 buah wortel, iris tipis\r\n3. 1 buah kentang, potong dadu\r\n4. 100 gram kol, iris kasar\r\n5. 50 gram buncis, potong kecil\r\n6. 1 batang daun bawang, iris halus\r\n7. 1 batang seledri, iris halus\r\n8. 2 siung bawang putih, memarkan dan cincang halus\r\n9. 1/2 bawang bombay, cincang halus\r\n10. 1 sendok makan minyak untuk menumis\r\n1,5 liter air\r\nGaram secukupnya\r\nMerica bubuk secukupnya\r\nKaldu bubuk atau kaldu blok (opsional) sesuai selera', '2024-06-08 21:41:50', '2024-06-08 21:41:50'),
+(9, NULL, '002', 'Sayur Bening', 15, 'Sayur Bening adalah salah satu hidangan sayuran tradisional Indonesia yang sangat sederhana dan sehat. Hidangan ini umumnya terbuat dari sayuran hijau yang dimasak dalam kuah bening dengan bumbu minimal, menciptakan rasa yang ringan dan menyegarkan. Sayur Bening sangat populer karena mudah dibuat dan cocok dikonsumsi sebagai bagian dari menu sehari-hari.\r\n\r\nSayuran:\r\n\r\n200 gram bayam, cuci bersih dan petik daunnya\r\n1 buah jagung manis, potong menjadi beberapa bagian\r\n1 buah wortel, iris tipis\r\n50 gram kacang panjang, potong-potong\r\nBumbu dan Rempah:\r\n\r\n2 siung bawang merah, iris tipis\r\n2 siung bawang putih, iris tipis\r\n1 ruas jari temu kunci, memarkan (opsional)\r\n1 liter air\r\nGaram secukupnya\r\nGula pasir secukupnya', '2024-06-08 22:21:51', '2024-06-08 22:27:16');
 
 -- --------------------------------------------------------
 
@@ -84,26 +79,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_06_01_061456_create_units_table', 1),
-(6, '2023_06_01_061527_create_items_table', 1),
-(7, '2024_06_10_144242_add_image_path_to_items_table', 1),
-(8, '2014_10_12_100000_create_password_resets_table', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(13, '2014_10_12_000000_create_users_table', 1),
+(14, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(15, '2019_08_19_000000_create_failed_jobs_table', 1),
+(16, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(17, '2023_06_01_061456_create_units_table', 1),
+(18, '2023_06_01_061527_create_items_table', 1);
 
 -- --------------------------------------------------------
 
@@ -146,7 +127,6 @@ CREATE TABLE `units` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -155,8 +135,8 @@ CREATE TABLE `units` (
 -- Dumping data for table `units`
 --
 
-INSERT INTO `units` (`id`, `code`, `name`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, '1', 'Ekor', NULL, '2024-06-10 08:55:30', '2024-06-10 08:55:30');
+INSERT INTO `units` (`id`, `code`, `name`, `created_at`, `updated_at`) VALUES
+(1, '1', 'Ekor', '2024-05-02 06:59:37', '2024-05-02 06:59:37');
 
 -- --------------------------------------------------------
 
@@ -174,17 +154,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'vanva', 'vanva@gmail.com', NULL, '$2y$10$eq9ioMhBDIsBGxDtLybaU.mdo0UxAj.JROuSYK8yKlfDnkSsjlP1O', NULL, '2024-06-10 20:39:16', '2024-06-10 20:39:16'),
-(2, 'sasa', 'sa@sa.sa', NULL, '$2y$10$brycEvis49ShbXAs1i5TrOcLsZvLMR4IlbrkrTePIB6YO3Npqj2lm', NULL, '2024-06-10 23:59:51', '2024-06-10 23:59:51'),
-(3, 'aa', 'aaa@gmail.com', NULL, '$2y$10$nYxr0IHzoAiRLqrUPUKeVOz6nF3gCkIkVAM07ejdH5tT291dA3f8S', NULL, '2024-06-11 00:05:45', '2024-06-11 00:05:45'),
-(4, 'sss', 'ss@ss.ss', NULL, '$2y$10$FjReFNS/vZUonlPRs/e7L.JLmRA6YwKdPzZ55TWeeWckKw6VvTObW', NULL, '2024-06-11 00:17:13', '2024-06-11 00:17:13'),
-(5, 'qq', 'qq@qq.qq', NULL, '$2y$10$wtjQgSqt2.7ZHuam7Gb/ZubGdyHUC2o48YW1wW4Ysa0CS74KuH6Ha', NULL, '2024-06-11 00:17:51', '2024-06-11 00:17:51');
 
 --
 -- Indexes for dumped tables
@@ -210,12 +179,6 @@ ALTER TABLE `items`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -258,13 +221,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -282,7 +245,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

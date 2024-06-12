@@ -32,7 +32,7 @@ Route::prefix('apps')->group(function () {
 
 Route::post('/item/upload-image', [ItemController::class, 'uploadImage'])->name('item.upload-image');
 
-Route::get('exportExcel', [ItemController::class, 'exportExcel'])->name('employees.exportExcel');
-
+// Route::get('exportExcel', [ItemController::class, 'exportExcel'])->name('employees.exportExcel');
+Route::get('exportPdf', [ItemController::class, 'exportPdf'])->name('item.exportPdf');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
